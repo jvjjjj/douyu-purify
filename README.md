@@ -14,12 +14,12 @@
 ### 净化后直播间界面
 保留直播画面、播放器控件、画面弹幕与右侧弹幕互动，移除底部礼物栏、专题页板块、广告挂件与贵宾榜单：
 
-![净化后直播间界面](./assets/preview-room.jpg)
+![净化后直播间界面](https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/assets/preview-room.jpg)
 
 ### 设置面板与实时拦截统计
 支持分项实时开关与拦截统计查看（请求拦截 / 媒体与 iframe 释放 / 特效画布拦截）：
 
-<img src="./assets/preview-settings.jpg" alt="设置面板与实时拦截统计" width="460" />
+<img src="https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/assets/preview-settings.jpg" alt="设置面板与实时拦截统计" width="460" />
 
 ## 核心特性
 
@@ -68,6 +68,9 @@
 
 ## 更新日志
 
+- **v1.1.2**
+  - 移除站外 `@downloadURL` / `@updateURL`，全面兼容 Greasy Fork 审核与自动同步规则。
+  - README 预览图改用 GitHub Raw 绝对路径，兼容 Greasy Fork 附加说明页直接展示图片。
 - **v1.1.1**
   - 修复开启「看点」功能后点击控制栏「X个看点」无法弹出右侧看点面板的问题（适配 `WebViewWithUnique` 实际渲染结构 `iframe[src*="ai-live-summary"]`）。
   - 排除 `/pages/*` 子页面及 iframe 嵌套环境执行，避免脚本误注入看点面板内部。

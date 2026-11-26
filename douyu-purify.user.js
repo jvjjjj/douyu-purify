@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name         斗鱼网页端极致净化 (Douyu Purify)
 // @namespace    https://www.douyu.com/
-// @version      1.1.1
+// @version      1.1.2
 // @description  净化斗鱼网页端：保留直播画面、播放器控件与弹幕，彻底清除广告、礼物栏、特效动画(SVGA/VAP)、专题页及后台冗余模块，显著降低CPU/GPU与内存占用。
 // @author       jvjjjj
 // @license      MIT
 // @homepageURL  https://github.com/jvjjjj/douyu-purify
 // @supportURL   https://github.com/jvjjjj/douyu-purify/issues
-// @downloadURL  https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/douyu-purify.user.js
-// @updateURL    https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/douyu-purify.user.js
 // @match        https://www.douyu.com/*
 // @match        http://www.douyu.com/*
 // @exclude      https://www.douyu.com/pages/*
