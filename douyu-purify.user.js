@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         斗鱼网页端极致净化 (Douyu Purify)
 // @namespace    https://www.douyu.com/
-// @version      1.1.0
+// @version      1.1.1
 // @description  净化斗鱼网页端：保留直播画面、播放器控件与弹幕，彻底清除广告、礼物栏、特效动画(SVGA/VAP)、专题页及后台冗余模块，显著降低CPU/GPU与内存占用。
 // @author       jvjjjj
 // @license      MIT
@@ -11,7 +11,8 @@
 // @updateURL    https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/douyu-purify.user.js
 // @match        https://www.douyu.com/*
 // @match        http://www.douyu.com/*
-// @exclude      https://www.douyu.com/pages/ord-task-center*
+// @exclude      https://www.douyu.com/pages/*
+// @exclude      http://www.douyu.com/pages/*
 // @run-at       document-start
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -21,6 +22,8 @@
 
 (function () {
   'use strict';
+
+  if (window.top !== window.self) return;
 
   const win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
   const CONFIG_KEY = 'dy_purify_config_v1';
@@ -85,6 +88,7 @@
   function isRoomPage() {
     try {
       const p = location.pathname || '/';
+      if (/^\/pages\//.test(p)) return false;
       if (/^\/(\d+|topic\/|beta\/)/.test(p)) return true;
       if (/[?&]rid=\d+/.test(location.search || '')) return true;
       if (document.body && document.body.classList.contains('live-next-body')) return true;
@@ -214,7 +218,8 @@ ${R}[data-dyp-ads="1"] #js-player-dialog > .player-dialog,
 ${R}[data-dyp-ads="1"] #js-player-video-above,
 ${R}[data-dyp-ads="1"] #js-player-guessgame,
 ${R}[data-dyp-ads="1"] #js-player-pendant,
-${R}[data-dyp-ads="1"] #js-player-interactive-panel:not(:has(.ai-live-summary)),
+${R}[data-dyp-ads="1"] #js-player-interactive-panel:not(:has(iframe[src*="ai-live-summary"])):not(:has(.ai-live-summary)),
+${R}[data-dyp-ads="1"] #js-player-interactive-panel > :not(:has(iframe[src*="ai-live-summary"])):not(.ai-live-summary),
 ${R}[data-dyp-ads="1"] #js-layout-fixed-banner,
 ${R}[data-dyp-ads="1"] #js-layout-fixed-buff,
 ${R}[data-dyp-ads="1"] #js-layout-fixed-right,
@@ -341,8 +346,12 @@ ${R}[data-dyp-iframes="1"] iframe.embed-msg {
 /* 12. 看点功能（AI看点）独立开关 */
 ${R}[data-dyp-highlight="0"] #js-player-controlbar [class*="aiHighlightEntry-"],
 ${R}[data-dyp-highlight="0"] [class*="ai-highlight-"],
+${R}[data-dyp-highlight="0"] .AiLiveSummaryBarrage,
+${R}[data-dyp-highlight="0"] .js-ai-live-summary-barrage,
+${R}[data-dyp-highlight="0"] .WebViewFrame.ai-live-summary,
+${R}[data-dyp-highlight="0"] .WebViewFrame:has(iframe[src*="ai-live-summary"]),
+${R}[data-dyp-highlight="0"] #js-player-interactive-panel:has(iframe[src*="ai-live-summary"]),
 ${R}[data-dyp-highlight="0"] #js-player-interactive-panel .ai-live-summary,
-${R}[data-dyp-highlight="0"] #js-player-interactive-panel:has(.ai-live-summary),
 ${R}[data-dyp-highlight="0"] iframe[src*="ai-live-summary"] {
   display: none !important;
 }

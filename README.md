@@ -68,6 +68,9 @@
 
 ## 更新日志
 
+- **v1.1.1**
+  - 修复开启「看点」功能后点击控制栏「X个看点」无法弹出右侧看点面板的问题（适配 `WebViewWithUnique` 实际渲染结构 `iframe[src*="ai-live-summary"]`）。
+  - 排除 `/pages/*` 子页面及 iframe 嵌套环境执行，避免脚本误注入看点面板内部。
 - **v1.1.0**
   - 新增「看点」功能独立开关（`enableHighlight`），与广告屏蔽解耦，可按需开启/关闭。
   - 添加 GitHub `@downloadURL` / `@updateURL` 自动更新源与 `MIT` 协议声明。
