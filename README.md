@@ -9,6 +9,18 @@
    - **[安装 douyu-purify.user.js](https://raw.githubusercontent.com/jvjjjj/douyu-purify/main/douyu-purify.user.js)**
 3. 或手动新建脚本，将仓库中的 `douyu-purify.user.js` 全文复制粘贴保存。
 
+## 效果预览
+
+### 净化后直播间界面
+保留直播画面、播放器控件、画面弹幕与右侧弹幕互动，移除底部礼物栏、专题页板块、广告挂件与贵宾榜单：
+
+![净化后直播间界面](./assets/preview-room.jpg)
+
+### 设置面板与实时拦截统计
+支持分项实时开关与拦截统计查看（请求拦截 / 媒体与 iframe 释放 / 特效画布拦截）：
+
+<img src="./assets/preview-settings.jpg" alt="设置面板与实时拦截统计" width="460" />
+
 ## 核心特性
 
 - **核心观看体验完整保留**：
