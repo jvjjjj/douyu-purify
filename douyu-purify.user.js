@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         斗鱼网页端极致净化 (Douyu Purify)
 // @namespace    https://www.douyu.com/
-// @version      1.1.2
+// @version      1.1.3
 // @description  净化斗鱼网页端：保留直播画面、播放器控件与弹幕，彻底清除广告、礼物栏、特效动画(SVGA/VAP)、专题页及后台冗余模块，显著降低CPU/GPU与内存占用。
 // @author       jvjjjj
 // @license      MIT
@@ -25,6 +25,7 @@
 
   const win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
   const CONFIG_KEY = 'dy_purify_config_v1';
+  const SCRIPT_VERSION = '1.1.3';
 
   const DEFAULT_CONFIG = {
     purifyTopic: true,       // 清除专题页上下板块、皮肤背景与推广视频
@@ -212,12 +213,11 @@ ${R}[data-dyp-effects="1"] .ScreenBanner {
 
 /* 4. 屏蔽广告、挂件、悬浮球、PK、竞猜、弹窗（注意保留 #js-player-dialog 容器以兼容扩展工具） */
 ${R}[data-dyp-ads="1"] #__hyad,
-${R}[data-dyp-ads="1"] #js-player-dialog > .player-dialog,
+${R}[data-dyp-ads="1"] #js-player-dialog > .player-dialog > :not(.ai-live-summary):not(:has(iframe[src*="ai-live-summary"])),
 ${R}[data-dyp-ads="1"] #js-player-video-above,
 ${R}[data-dyp-ads="1"] #js-player-guessgame,
 ${R}[data-dyp-ads="1"] #js-player-pendant,
-${R}[data-dyp-ads="1"] #js-player-interactive-panel:not(:has(iframe[src*="ai-live-summary"])):not(:has(.ai-live-summary)),
-${R}[data-dyp-ads="1"] #js-player-interactive-panel > :not(:has(iframe[src*="ai-live-summary"])):not(.ai-live-summary),
+${R}[data-dyp-ads="1"][data-dyp-highlight="0"] #js-player-interactive-panel,
 ${R}[data-dyp-ads="1"] #js-layout-fixed-banner,
 ${R}[data-dyp-ads="1"] #js-layout-fixed-buff,
 ${R}[data-dyp-ads="1"] #js-layout-fixed-right,
@@ -342,6 +342,14 @@ ${R}[data-dyp-iframes="1"] iframe.embed-msg {
 }
 
 /* 12. 看点功能（AI看点）独立开关 */
+${R}[data-dyp-highlight="1"] #js-player-interactive-panel {
+  display: flex !important;
+}
+${R}[data-dyp-highlight="1"] #js-player-interactive-panel:has(.WebViewFrame.is-show) {
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
 ${R}[data-dyp-highlight="0"] #js-player-controlbar [class*="aiHighlightEntry-"],
 ${R}[data-dyp-highlight="0"] [class*="ai-highlight-"],
 ${R}[data-dyp-highlight="0"] .AiLiveSummaryBarrage,
@@ -830,7 +838,7 @@ body.is-fullScreen #dyp-ui-host,
       <div class="dyp-backdrop" id="dyp-backdrop">
         <div class="dyp-modal" role="dialog" aria-label="斗鱼净化设置">
           <div class="dyp-head">
-            <span class="dyp-title">斗鱼网页端极致净化</span>
+            <span class="dyp-title">斗鱼网页端极致净化 v${SCRIPT_VERSION}</span>
             <button class="dyp-close" id="dyp-close" title="关闭">×</button>
           </div>
           <div class="dyp-stats" id="dyp-stats"></div>

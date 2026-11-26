@@ -68,6 +68,9 @@
 
 ## 更新日志
 
+- **v1.1.3**
+  - 彻底修复开启「看点」功能后点击「X个看点」无响应的问题：开启看点时不再对 `#js-player-interactive-panel` 施加 `display: none`，并在 `.WebViewFrame.is-show` 出现时强制滑出展示。
+  - 细化 `.player-dialog` 屏蔽范围并在设置面板标题栏显示当前版本号，便于确认更新生效。
 - **v1.1.2**
   - 移除站外 `@downloadURL` / `@updateURL`，全面兼容 Greasy Fork 审核与自动同步规则。
   - README 预览图改用 GitHub Raw 绝对路径，兼容 Greasy Fork 附加说明页直接展示图片。
